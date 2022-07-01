@@ -1,0 +1,125 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+
+        int[][] tab= new int[9][9];
+  
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int n = in.nextInt();
+                tab[i][j]=n;
+            }
+        }
+
+        // verification des lignes
+
+        boolean[] unique = new boolean[9];
+
+        for (int i = 0; i < 9; i++) {
+
+            Set<Integer> set = new HashSet<>();
+            for (int j = 0; j < 9; j++) {
+ 
+                int test = tab[i][j];
+                set.add(test);
+            }
+            if( set.size() == 9){
+            unique[i]=true;
+            }
+        }
+
+        // verification des colonnes
+
+        boolean[] unique2 = new boolean[9];
+
+        for (int i = 0; i < 9; i++) {
+
+            Set<Integer> set = new HashSet<>();
+            for (int j = 0; j < 9; j++) {
+ 
+                int test = tab[j][i];
+                set.add(test);
+            }
+            if(set.size()==9){
+            unique2[i]=true;
+            }
+        }
+
+        boolean check1=true;
+        boolean check2=true;
+
+        for(int i =0; i<unique.length;i++){
+            if(unique[i]==false){
+                check1=false;
+            }
+        }
+
+       for(int i =0; i < unique2.length;i++){
+            if(unique2[i]==false){
+                check2=false;
+            }
+        }        
+
+        // verification des sous-grilles
+
+    ArrayList<Boolean> tab2 = new ArrayList<>();
+
+        for (int i = 0; i < 7; i+=3) {
+
+            for (int j = 0; j < 7; j+=3) {
+
+                Set<Integer> set = new HashSet<>();
+                
+                for (int k = 0 ; k < 3 ; k++){
+                    for(int l = 0 ; l < 3 ; l++){
+                        int x=i+k;
+                        int y= j+l;
+                        int test = tab[x][y];
+                        set.add(test);
+
+                    }
+                }
+
+                if(set.size()==9){
+                tab2.add(true);
+                }
+            }
+        }
+
+
+        boolean check3=true;
+
+        if(tab2.size() != 9){
+            check3=false;
+        } else{
+
+            for (int i = 0 ; i < 9 ; i++) {
+                if(tab2.get(i)==false){
+                    check3=false;
+                }
+            }
+        }
+
+        // CHECK FINAL
+
+        boolean check=true;
+        if (check1 && check2 && check3){
+        check=true;
+        }else {
+            check=false;
+        }
+
+
+    System.out.println(check);
+
+    }
+}
