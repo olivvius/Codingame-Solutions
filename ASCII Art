@@ -1,0 +1,69 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int L = in.nextInt();
+        int H = in.nextInt();
+
+        // Fabrication du DICO de caracteres ASCII.
+
+        String [][] dico= new String[27][H];
+
+        if (in.hasNextLine()) {
+            in.nextLine();
+        }
+        String T = in.nextLine();
+        for (int i = 0; i < H; i++) {
+            String ROW = in.nextLine();
+            for(int j = 0; j < 27; j++){
+                dico[j][i] = ROW.substring(j*L, (j+1)*L);
+               // System.out.println(dico[j][i]);
+            }
+        }
+
+        // Fabrication de le chaine à convertir, initialisee a 0.
+
+        int longueur= T.length();
+        int[] code= new int[longueur]; 
+
+        for (int i =0 ; i < longueur ; i++){
+            code[i]=(int) T.toUpperCase().charAt(i)-65;
+
+        }
+
+        for (int i =0 ; i < longueur ; i++) {if (code[i] <0 || code [i] > 26){code[i]=26;}}
+
+        // Fabrication des lettres puis du mot final.
+
+        String[] mot = new String[H];
+
+        Arrays.fill(mot, "");
+
+        for (int j = 0 ; j<longueur ; j++){
+
+            String[] lettre=new String[H];
+
+                for (int i=0; i < H ; i++){
+                lettre[i]=dico[code[j]][i];
+
+                mot[i]+=lettre[i];
+            }
+
+        }
+        // Affichage du mot final
+
+        for (int i = 0 ; i < H ; i++){
+
+            System.out.println(mot[i]);
+        }
+
+    }
+}
