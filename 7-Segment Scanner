@@ -1,0 +1,32 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+class Solution {
+
+    public static void main(String args[]) {
+
+        Scanner in = new Scanner(System.in);
+        String l1 = in.nextLine();
+        String l2 = in.nextLine();
+        String l3 = in.nextLine();
+
+        String result="";
+
+            for (int i = 0 ; i < l1.length() ; i+=3){
+
+                if( l1.charAt(i+1) ==' ' && l2.charAt(i+1)=='_' ) { result+="4"; }
+                else if ( l1.charAt(i+1) ==' ' && l2.charAt(i+1)==' ' )  { result+="1";}
+                else if ( l3.charAt(i+1) ==' ' )  { result+="7";}
+                else if ( l2.charAt(i+1) ==' ')  { result+="0";}
+                else if ( l1.charAt(i) ==' ' && l2.charAt(i+1)=='_' && l3.charAt(i+2)==' ' )  { result+="2";}
+                else if ( l3.charAt(i) ==' ' && l2.charAt(i)==' ' && l2.charAt(i+1)=='_' )  { result+="3";}
+                else if ( l3.charAt(i) ==' ' && l2.charAt(i)=='|' && l2.charAt(i+1)=='_'&& l2.charAt(i+2)==' ')  { result+="5";}
+                else if ( l2.charAt(i+2) ==' ')  { result+="6";}
+                else if ( l3.charAt(i) =='|')  { result+="8";}
+                else {result+="9";}
+        }
+    //int result2=Integer.parseInt(result);
+    System.out.println(result);
+    }
+}
