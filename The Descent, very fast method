@@ -15,6 +15,6 @@ class Player {
                 tab.add(H);
             }
         System.out.println(tab.indexOf(Collections.max(tab)));
-        }a
+        }
     }
 }
