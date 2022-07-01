@@ -1,0 +1,45 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+class Solution {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int N = in.nextInt(); // Number of elements which make up the association table.
+        int Q = in.nextInt(); // Number Q of file names to be analyzed.
+
+        HashMap<String,String> tab = new HashMap<String,String>();
+
+        for (int i = 0; i < N; i++) {
+
+            String EXT = in.next(); // file extension
+            String MT = in.next(); // MIME type.
+            tab.put(EXT.toLowerCase(), MT);
+        }
+        String[] tab2= new String[Q];
+       in.nextLine();
+        for (int i = 0; i < Q; i++) {
+            String F = in.nextLine(); // One file name per line.
+            tab2[i]=extension(F);
+        }
+
+        for(int i=0 ; i< Q ; i++){
+            String result=tab.getOrDefault(tab2[i].toLowerCase(), "");
+
+            if(!result.isEmpty()){
+                System.out.println(result);
+            }
+            else{
+            System.out.println("UNKNOWN");       
+            }
+        }
+    }
+        //METHODE pour avoir l'extension
+    public static String extension(String mot){
+        if(mot.indexOf(".") != -1){
+        return mot.substring(mot.lastIndexOf(".") + 1);
+        }
+        else{return "";}
+    }
+}
