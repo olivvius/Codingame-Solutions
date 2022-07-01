@@ -1,0 +1,69 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+ class Noeud {
+    int x, y;
+
+    public Noeud(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return x + " " + y;
+    }
+} 
+class Player {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int w = in.nextInt(); // the number of cells on the X axis
+        int h = in.nextInt(); // the number of cells on the Y axis
+        if (in.hasNextLine()) {
+            in.nextLine();
+        }
+        char[][] tab = new char[h][w];
+        for (int y = 0; y < h; y++) {
+            tab[y] = in.nextLine().toCharArray();
+        }
+
+        for(int y = 0; y < h; y++) {
+            for(int x = 0; x < w; x++) {
+                if(tab[y][x] == '0') {
+                    Noeud N1 = new Noeud(x, y);                    
+                    Noeud rightNoeud = N2(tab, N1);
+                    Noeud bottomNoeud = N3(tab, N1);
+                    System.out.println(N1 + " " + rightNoeud + " " + bottomNoeud);
+                }
+            }
+        }
+    }
+
+    private static Noeud N2(char[][] tab, Noeud N1) {
+        int i = N1.x + 1;
+
+        while(i < tab[N1.y].length && tab[N1.y][i] != '0') {
+            i++;
+        }
+
+        if(i == tab[N1.y].length) {
+            return new Noeud(-1, -1);
+        }
+        return new Noeud(i, N1.y);
+    }
+
+    private static Noeud N3(char[][] tab, Noeud N1) {
+        int i = N1.y + 1;
+
+        while(i < tab.length && tab[i][N1.x] != '0') {
+            i++;
+        }
+
+        if(i == tab.length) {
+            return new Noeud(-1, -1);
+        }
+        return new Noeud(N1.x, i);
+    }
+} 
