@@ -1,0 +1,54 @@
+import sys
+import math
+
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+message = input()
+
+# Write an answer using print
+# To debug: print("Debug messages...", file=sys.stderr, flush=True)
+
+def toBin(a):
+  l=[]
+  str =""
+  for i in a:
+    l.append(ord(i))
+  for i in l:
+    str += bin(i)[2:]
+  return str
+
+mess = toBin(message)
+
+res = ''.join(format(ord(i), '08b') for i in message)
+
+
+mess3 = ''
+
+for i in range(len(message)):
+    char = str(bin(ord(message[i])))[2:]
+    char = char.zfill(7)
+    mess3 += char
+
+mess3 = mess3.replace('01', '0 1').replace('10', '1 0')
+list = mess3.split()
+
+
+output=''
+
+for i in range(len(list)):
+    if list[i].startswith('1'):
+        output += '0 '
+        for j in list[i]:
+            output += '0'
+        if i < len(list)-1:
+            output += ' '
+    if list[i].startswith('0'):
+        output += '00 '
+        for j in list[i]:
+            output += '0'
+        if i < len(list)-1:
+            output += ' '
+print(output)
+
+
