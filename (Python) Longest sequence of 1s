@@ -1,0 +1,39 @@
+import sys
+import math
+from re import search
+
+def maxlength(s):
+    n = len(s)
+    ans = 0
+    for i in range(n):
+        if (s[i] == '1'):
+            count = 1
+            j = i + 1
+            while(j <= n - 1 and s[j] == '1'):
+                count += 1
+                j += 1
+            ans = max(ans, count)
+    return ans
+
+b = input()
+l = list(b)
+maxi = 0
+
+for i in range(len(l)):
+    if search('0', l[i]):
+        m=[]
+        for j in range(len(l)):
+            m.append(l[j])  
+        m[i] = '1'
+        c = "".join(m)
+        if maxlength(c) > maxi :
+            maxi= maxlength(c)
+
+
+
+
+
+
+
+
+print(maxi)
