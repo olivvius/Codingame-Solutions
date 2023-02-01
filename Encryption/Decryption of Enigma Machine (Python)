@@ -1,0 +1,64 @@
+import sys
+import math
+import numpy as np
+from re import search
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+operation = input()
+num = int(input())
+rotor2=[['' for i in range(26)] for j in range(3)]
+
+for i in range(3):
+    rotor=input()
+    for j in range(26):
+        rotor2[i][j]=rotor[j]
+
+message = input()
+
+if operation == 'ENCODE':
+    result=''
+    for i in range(len(message)):
+        char=message[i]
+        result += chr((ord(char)+i + num-65) % 26 + 65)
+
+    result2=''
+    for i in range(len(result)):
+                result2 += rotor2[0][ord(result[i])-65]
+
+    result3=''
+    for i in range(len(result2)):
+                result3 += rotor2[1][ord(result2[i])-65]
+
+    result4=''            
+    for i in range(len(result3)):
+                result4 += rotor2[2][ord(result3[i])-65]
+
+    print(result4)
+
+if operation == 'DECODE':
+    result = ''
+    for i in range(len(message)):
+        for j in range(26):
+            if search(message[i],rotor2[2][j]):
+                result += chr(j+65)
+
+    result2 = ''
+    for i in range(len(result)):
+        for j in range(26):
+            if search(result[i],rotor2[1][j]):
+                result2 += chr(j+65)
+
+    result3 = ''
+    for i in range(len(result2)):
+        for j in range(26):
+            if search(result2[i],rotor2[0][j]):
+                result3 += chr(j+65)
+
+    result4 = ''
+    for i in range(len(result3)):
+        char=result3[i]
+        result4 += chr((ord(char) - i - num + 65) % 26 + 65)    
+
+
+    print(result4)
